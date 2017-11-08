@@ -27,14 +27,15 @@ git merge dev #把当前分支的指针指向到dev上(HEAD指针不变，仍然
 git branch -d name
 ###git merge 关键是注意冲突的解决问题
 git log --graph --pretty=oneline #查看分支合并图
-git merge --no-ff -m "merge with no-ff" dev　#提交一个新的commit，进行合并，合并之后dev分支的位置不变，但是mastet分支指向的是新的commit,这个commit领先于原来的dev,与dev的内容相同
+git merge --no-ff -m "merge with no-ff" dev　#提交一个新的commit，进行合并，合并之后dev分支的位置不变
+                         ，但是mastet分支指向的是新的commit,这个commit领先于原来的dev,与dev的内容相同
 git checkout -b dev origin/dev　#创建一个分支并且与已经存在的远程分支进行关联
 ```
 git stash
 ```linux
 # git stash 把当前的工作区的内容存储起来，然后可以去做其他的操作（比如修改bug），处理完之后在恢复就好了
 # 实际上是把add了但是还没有commit的内容储存在栈中，这时候去做别的处理之后可以回来恢复现场
-git stash: 备份当前的工作区的内容，从最近的一次提交中读取相关内容，让工作区保证和上次提交的内容一致。同时，将当前的工作区内容保存到Git栈中。
+git stash: 备份当前的工作区的内容，让工作区保证和上次提交的内容一致。同时，将当前的工作区内容保存到Git栈中。
 git stash pop: 从Git栈中读取最近一次保存的内容，恢复工作区的相关内容。
 git stash list: 显示Git栈内的所有备份，可以利用这个列表来决定从那个地方恢复。
 git stash clear: 清空Git栈。此时使用gitg等图形化工具会发现，原来stash的哪些节点都消失了。
