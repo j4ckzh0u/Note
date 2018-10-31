@@ -1,0 +1,193 @@
+---
+layout:   post
+title:    Redis基础
+date:     2018-05-13
+category: redis
+tags: [redis]
+---
+
+Redis基础
+---
+
+NoSql的分类
+- K-V键值对(Redis)
+- 文档类型数据库(MongDB)
+- 列存储数据库(HBase)
+- 图关系数据库(Neo4J)
+
+CAP(只能三选二)
+- 强一致性  Consistency
+- 高可用性   Availablity
+- 分区容错性 Partion tolerance
+
+- CA 传统数据库
+- AP 大多数网站架构的选择(弱一致性)
+- CP Redis、Modgdb
+
+BASE
+- Bascially Available
+- Soft State
+- Eventually consistent
+Base的思想是让系统放松对于某一个时刻的数据v一致性的要求好换取系统整体性能的神索性和性能上的改观
+
+
+Redis(REmote DIctionary Server)
+支持持久化/支持多种数据类型/支持数据的备份
+
+
+
+Re是dis单进程模型
+默认是16个数据库，`select i`切换到第i个数据库
+dbsize 当前库的大小
+
+flushdb清空库
+flushall清空所有的库
+
+merz(是一个女歌手) 默认端口号是6379
+
+数据类型
+五大数据类型
+- String    二进制安全
+- Hash      值的本身也是一个键值对的list
+- List      双向链表
+- Set
+- Zset      有序的集合
+
+
+|key命令||
+|-|-|
+|    del     ||
+|    keys    ||
+|    randomkey ||
+|    ttl     ||
+|    pttl    ||
+|    expire  ||
+|    pexpire ||
+|    expireAt  |接unix时间戳|
+|    pexpireAt |接unix时间戳(毫秒)|
+|    exists  ||
+|    move    ||
+|    select  |  切换到指定的数据库 |
+|    rename  ||
+|    renamenx||
+|    type    ||
+|    persist ||
+|    sort    |比较复杂，详情查看具体解释|
+|    object  |比较复杂，详情查看具体解释|
+|    migrate ||
+|    dump    |序列化|
+|    restore |反序列化|
+
+Sort命令
+```redis
+```
+object命令
+```redis
+```
+|string命令||
+|-|-|
+|    set     ||
+|    setnx   ||
+|    setex   ||
+|    setrange||
+|    mset    ||
+|    msetnx  ||
+|    append  ||
+|    get     ||
+|    mget    ||
+|    getrange||
+|    getset  |赋值并且返回旧值|
+|    strlen  ||
+|    decr    ||
+|    decrby  ||
+|    incr    ||
+|    incrby  ||
+|    incrbyfloat||
+|    setbit  |是在二进制级别上的修改，只能置0/1 |
+|    getbit  |是在二进制级别上的获取，只能得到0/1|
+|    bitop   |比较复杂，详情查看具体解释|
+|    bitcount||
+
+bitop
+```
+```
+|    hash命令||
+|-|-|
+|    hset     ||
+|    hsetnx   ||
+|    hmset    ||
+|    hget     ||
+|    hmget    ||
+|    hgetall  ||
+|    hdel     ||
+|    hlen     ||
+|    hexists  ||
+|    hincrby  ||
+|    hincrbyFloat ||
+|    hkeys    ||
+|    hvals    ||
+
+|    list命令||
+|-|-|
+|    lpush    | 可以一次性加入多个|
+|    LPushx   ||
+|    rpush    ||
+|    rpushx   ||
+|    lpop     ||
+|    rpop     ||
+|    blpop    |阻塞版本|
+|    brpop    ||
+|    llen     ||
+|    lrange   ||
+|    lrem     ||
+|    ltrim    ||
+|    lindex   ||
+|    linsert  ||
+|    rpoplpush||
+|    brpoplpush ||
+
+
+
+|    set命令||
+|-|-|
+|    sadd     | 可以一次性加入多个|
+|    smembers   ||
+|    sismember    ||
+|    scard   ||
+|    smove     ||
+|    srandmember     ||
+|    sinter    ||
+|    sinterstore    ||
+|    sunion    ||
+|    sunionstore    ||
+|    sdiff    ||
+|    sdiffstore  |   -|
+
+set和Zset都是string类型的元素的集合。只是Zset加上一个score属性，用来排序
+
+|    zset命令||
+|-|-|
+|    zadd     ||
+|    zrem   ||
+|    zcard     ||
+|    zcount    |zcount key min max|
+|    zscore   ||
+|    zincrby  | 增加的是score的值zincrby key increment member|
+|    zrange   | zrange key start stop [WITHSCORES] 按照score值递增|
+|    zRevRange | 按照score递减|
+|    zrangebyscore| zrangebyscore key min max [WITHSCORES] [LIMIT offset count] |
+|    zrevrangebyscore| zrevrangebyscore key max min [WITHSCORES] [LIMIT offset count] |
+|    zrank|  |
+|    zrevrank||
+|    ZREMRANGEBYRANK|移除有序集 key 中,指定排名(rank)区间内的所有成员|
+|    zremrangebyscore|移除有序集 key 中,所有 score 值介于 min 和 max 之间(包括等于 min 或 max )的成员|
+|ZINTERSTORE||
+|ZUnionSTORE||
+
+ZINTERSTORE和ZUnionSTORE
+```
+计算给定的一个或多个有序集的交集(并集),其中给定 key 的数量必须以 numkeys 参数指定,
+并将该交集(结果集)储存到 destination 。
+默认情况下,结果集中某个成员的 score 值是所有给定集下该成员 score 值之和.
+ZINTERSTORE sum_point 2 mid_test fin_test
+```
