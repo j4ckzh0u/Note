@@ -30,5 +30,26 @@ public boolean equals(Object obj) {
 
 
 
+```java
+Pattern p = Pattern.compile("cat");
+Matcher m = p.matcher("one cat two cats in the yard");
+StringBuffer sb = new StringBuffer();
+while (m.find()) {
+	m.appendReplacement(sb, "dog");
+}
+m.appendTail(sb);
+System.out.println(sb.toString());
+输出结果为:one dog two dogs in the yard
+```
+
+```java
+将线程设置为中断状态
+public void interrupt()  
+返回当前的中断状态，并将中断状态清零(下一次的访问一定返回false)
+public boolean isInterrupted();
+静态方法，调用当前线程的isInterrupted方法
+public static boolean interrupted();
+```
+
 
 

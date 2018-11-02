@@ -39,6 +39,6 @@ ALTER TABLE DROP COLUMN 列名;
 ALTER TABLE 表名 MODIFY 列名 新数据类型 [新属性];
 ALTER TABLE 表名 MODIFY 列名 列的类型 列的属性 FIRST;
 ALTER TABLE 表名 MODIFY 列名 列的类型 列的属性 after 指定列名;
-ALTER TABLE 表名 CHANGE 旧列名 新列名 新数据类型 [新属性];
+ALTER TABLE 表名 CHANGE 旧列名 新列名 新数据类型 [新属性];   //这个可以用来对一个列进行改名字
 ```
 
