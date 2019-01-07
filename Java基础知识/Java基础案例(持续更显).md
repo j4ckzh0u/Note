@@ -1,7 +1,7 @@
 ## 自动拆装箱中的比较
 
 ```Java
-   		Integer a=111;
+   	Integer a=111;
         Integer b=222;
         Integer c=333;
         Long g=333L;
